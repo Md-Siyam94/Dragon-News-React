@@ -1,5 +1,6 @@
 import React from "react";
 import { FaStar, FaEye, FaFire } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const NewsCard = ({ news }) => {
   return (
@@ -37,12 +38,12 @@ const NewsCard = ({ news }) => {
       </p>
 
       {/* Read More */}
-      <a
-        href="#"
+      <Link
+        to={`/news/${news._id}`}
         className="text-sm text-blue-500 font-medium underline hover:text-blue-700 mb-3 inline-block"
       >
         Read More
-      </a>
+      </Link>
 
       {/* Footer */}
       <div className="flex justify-between items-center">

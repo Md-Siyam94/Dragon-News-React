@@ -16,13 +16,12 @@ const LeftAsside = () => {
             console.log("ERROr", error.message)
         })
     },[])
-    console.log(category)
     return (
         <div>
             <h3>All Categories</h3>
             <div className="flex flex-col mt-6 gap-1 ">
                 {
-                    category.map(category=> <NavLink to={`category/${category.category_id}`} className="btn bg-base-100 text-start" category={category} key={category.id}>{category.category_name}</NavLink>)
+                    category.map(category=> <NavLink to={`category/${category.category_id}`} className="btn bg-base-100 text-start" category={category} key={category._id}>{category.category_name}</NavLink>)
                 }
             </div>
         </div>
