@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContex } from "../provider/AuthProvider";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
@@ -7,7 +7,11 @@ import { FaEyeSlash } from "react-icons/fa";
 
 const Login = () => {
     const [showpassword, setPassword] = useState(false)
+    const [error, setError] = useState("")
     const { login } = useContext(AuthContex)
+    const navigate = useNavigate()
+    const location = useLocation()
+    console.log(location)
     const handleLogin = (e) => {
         e.preventDefault()
 
@@ -18,9 +22,11 @@ const Login = () => {
         login(email, password)
             .then(result => {
                 console.log(result)
+                navigate(location?.state ? location.state : "/")
+                
             })
             .catch(error => {
-                console.log("ERROr", error.message)
+                setError(error.message.slice(16))
             })
 
     }
@@ -49,6 +55,10 @@ const Login = () => {
                             <button onClick={()=>setPassword(!showpassword)} className="absolute pt-1 mt-12 ml-72">
                                    {showpassword ? <FaEye /> : <FaEyeSlash /> }
                             </button>
+
+                            <div className="my-3">
+                                <p className="text-red-500 font-semibold text-sm">{error}</p>
+                            </div>
                             <label className="label">
                                 <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                             </label>

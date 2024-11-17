@@ -11,6 +11,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Navbar from "./components/Navbar";
 import NewsDetails from "./pages/NewsDetails";
+import PrivetRoute from "./layout/PrivetRoute";
 
 
 
@@ -33,7 +34,7 @@ const router = createBrowserRouter([
     },
     {
         path: "/news/:id",
-        element: <NewsDetails></NewsDetails>,
+        element: <PrivetRoute><NewsDetails></NewsDetails></PrivetRoute>,
         loader: ({params}) => fetch(`https://openapi.programming-hero.com/api/news/${params.id}`)
     },
     {

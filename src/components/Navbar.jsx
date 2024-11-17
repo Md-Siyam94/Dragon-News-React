@@ -1,4 +1,4 @@
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import User from '../assets/user.png'
 import { useContext } from "react";
 import { AuthContex } from "../provider/AuthProvider";
@@ -6,14 +6,14 @@ import { AuthContex } from "../provider/AuthProvider";
 
 const Navbar = () => {
     const routes = <>
-    <li><Link to={"/"}>Home</Link></li>
-    <li><Link to={"/"}>About</Link></li>
-    <li><Link to={"/"}>Career</Link></li>
+        <li><Link to={"/"}>Home</Link></li>
+        <li><Link to={"/"}>About</Link></li>
+        <li><Link to={"/"}>Career</Link></li>
     </>
 
-    const {user,logOut} = useContext(AuthContex)
+    const { user, logOut } = useContext(AuthContex)
 
-    const handleLogOut =()=>{
+    const handleLogOut = () => {
         logOut()
     }
     return (
@@ -37,8 +37,8 @@ const Navbar = () => {
                     <ul
                         tabIndex={0}
                         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                        
-                    {routes}
+
+                        {routes}
 
                     </ul>
                 </div>
@@ -46,23 +46,28 @@ const Navbar = () => {
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
-                    
+
                     {routes}
                 </ul>
             </div>
             <div className="navbar-end gap-2">
+                <div className="">
+                    {
+                        user ? <div className="flex gap-2 items-center">
+                            <h2 className="font-semibold ">{user?.displayName}</h2>
+                            <img className="h-8 w-8 rounded-full" src={user?.photoURL} alt="" />
+                        </div> : <img className="h-8 w-8" src={User} alt="" />
+                    }
+                </div>
                 <div>
-                    <img className="h-8 w-8" src={User} alt="" />
+                    {
+                        user ? <Link onClick={handleLogOut}
+                            className="px-6 py-1 border bg-black bg-opacity-80 font-semibold text-white">Log Out</Link>
+                            : <Link to={"/auth/login"}
+                                className="px-6 py-1 border bg-black bg-opacity-80 font-semibold text-white">Login</Link>
+                    }
                 </div>
-                <div>               
-                {
-                    user ? <Link onClick={handleLogOut} 
-                    className="px-6 py-1 border bg-black bg-opacity-80 font-semibold text-white">Log Out</Link>
-                     : <Link to={"/auth/login"} 
-                     className="px-6 py-1 border bg-black bg-opacity-80 font-semibold text-white">Login</Link>
-                }
-                </div>
-                
+
             </div>
         </div>
     );
